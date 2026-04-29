@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Gelado Climatização</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0057a8;
+    --blue-dark: #003d7a;
+    --blue-light: #e8f2ff;
+    --accent: #00aaff;
+    --gray: #f4f6f9;
+    --gray2: #e0e6ef;
+    --dark: #0d1525;
+    --text: #3a4560;
+    --white: #ffffff;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(0,87,168,0.10);
+    --shadow-lg: 0 8px 48px rgba(0,87,168,0.16);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--white); color: var(--dark); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,87,168,0.10);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%;
+    height: 70px;
+    box-shadow: 0 2px 20px rgba(0,87,168,0.07);
+  }
+  .nav-brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .nav-brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 0; height: 70px; align-items: center; }
+  .nav-links a {
+    display: flex; align-items: center;
+    padding: 0 1.2rem;
+    font-size: 0.82rem; font-weight: 600;
+    color: var(--text); text-decoration: none;
+    letter-spacing: 0.4px;
+    border-bottom: 2px solid transparent;
+    height: 100%;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .nav-cta-btn {
+    background: var(--blue); color: var(--white) !important;
+    padding: 0 1.4rem !important;
+    border-radius: 8px !important;
+    border-bottom: none !important;
+    font-weight: 700 !important;
+    height: 38px !important;
+    margin-left: 0.5rem;
+    transition: background 0.2s !important;
+  }
+  .nav-cta-btn:hover { background: var(--blue-dark) !important; }
+
+  /* HERO DO BLOG */
+  .blog-hero {
+    background: linear-gradient(120deg, #071220 0%, #0d1e3a 60%, #0a1a30 100%);
+    padding: 4rem 6%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .blog-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 60%, rgba(0,170,255,0.10) 0%, transparent 70%);
+  }
+  .blog-hero-tag {
+    display: inline-block;
+    background: rgba(0,170,255,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(0,170,255,0.3);
+    border-radius: 100px;
+    padding: 0.3rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+  .blog-hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .blog-hero h1 em { color: var(--accent); font-style: normal; }
+  .blog-hero p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* FILTROS */
+  .blog-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 2rem 6%;
+    flex-wrap: wrap;
+    background: var(--gray);
+    border-bottom: 1px solid var(--gray2);
+  }
+  .filter-btn {
+    padding: 0.45rem 1.2rem;
+    border-radius: 100px;
+    border: 2px solid var(--gray2);
+    background: var(--white);
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: var(--white);
+  }
+
+  /* GRADE DE POSTS */
+  .blog-wrap {
+    padding: 3.5rem 6%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .post-card {
+    background: var(--white);
+    border: 1px solid var(--gray2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+  .post-thumb {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--blue-light) 0%, #d0e8ff 100%);
+  }
+  .post-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .post-tag {
+    display: inline-block;
+    background: var(--blue-light);
+    color: var(--blue);
+    border-radius: 100px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+  }
+  .post-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.6rem;
+    line-height: 1.4;
+  }
+  .post-excerpt {
+    font-size: 0.87rem;
+    color: var(--text);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 1.2rem;
+  }
+  .post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--gray2);
+    padding-top: 1rem;
+    margin-top: auto;
+  }
+  .post-author {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .author-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .post-date { font-size: 0.76rem; color: #888; }
+  .read-more {
+    display: inline-block;
+    margin-top: 0;
+    color: var(--blue);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .read-more:hover { color: var(--accent); }
+
+  /* POST DESTAQUE */
+  .post-featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--gray2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 1rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .post-featured:hover {
+    box-shadow: 0 12px 56px rgba(0,87,168,0.22);
+    transform: translateY(-4px);
+  }
+  .post-featured .post-thumb {
+    height: 100%;
+    min-height: 260px;
+    font-size: 5rem;
+    background: linear-gradient(135deg, #0057a8 0%, #00aaff 100%);
+  }
+  .post-featured .post-tag { background: rgba(0,170,255,0.15); color: var(--accent); border: 1px solid rgba(0,170,255,0.3); }
+  .post-featured .post-body { padding: 2.5rem; }
+  .post-featured .post-title { font-size: 1.35rem; margin-bottom: 0.9rem; }
+  .post-featured .post-excerpt { font-size: 0.95rem; }
+  .featured-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--blue);
+    color: var(--white);
+    border-radius: 100px;
+    padding: 0.25rem 0.85rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.6rem;
+  }
+
+  /* NEWSLETTER */
+  .newsletter-bar {
+    background: linear-gradient(120deg, var(--blue-dark), var(--blue));
+    padding: 3rem 6%;
+    text-align: center;
+    color: var(--white);
+  }
+  .newsletter-bar h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .newsletter-bar p { opacity: 0.75; margin-bottom: 1.5rem; font-size: 0.95rem; }
+  .newsletter-form { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .newsletter-form input {
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+    font-family: inherit;
+    min-width: 280px;
+    outline: none;
+  }
+  .newsletter-form button {
+    padding: 0.75rem 1.75rem;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .newsletter-form button:hover { background: #0099ee; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 6%;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.7);
+  }
+  .footer-brand span { color: var(--accent); }
+  .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; font-weight: 600; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .blog-grid { grid-template-columns: 1fr 1fr; }
+    .post-featured { grid-template-columns: 1fr; }
+    .post-featured .post-thumb { min-height: 180px; }
+  }
+  @media (max-width: 580px) {
+    .blog-grid { grid-template-columns: 1fr; }
+    .nav-links a { padding: 0 0.7rem; font-size: 0.76rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">GELADO <span>.</span></a>
+  <div class="nav-links">
+    <a href="index.html#servicos">Serviços</a>
+    <a href="index.html#sobre">Sobre</a>
+    <a href="index.html#refrig-industrial">Refrigeração Industrial</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="index.html#contato" class="nav-cta-btn">Solicitar Orçamento</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="blog-hero">
+  <div class="blog-hero-tag">✍️ Blog Técnico</div>
+  <h1>Conhecimento em <em>Refrigeração</em><br>& Climatização</h1>
+  <p>Artigos técnicos, dicas práticas e novidades do setor HVAC diretamente de quem vive a refrigeração no dia a dia.</p>
+</div>
+
+<!-- FILTROS -->
+<div class="blog-filters">
+  <button class="filter-btn active" onclick="filterPosts('todos')">Todos</button>
+  <button class="filter-btn" onclick="filterPosts('manutencao')">Manutenção</button>
+  <button class="filter-btn" onclick="filterPosts('industrial')">Industrial</button>
+  <button class="filter-btn" onclick="filterPosts('dicas')">Dicas</button>
+  <button class="filter-btn" onclick="filterPosts('normas')">Normas & Legislação</button>
+</div>
+
+<!-- POSTS -->
+<div class="blog-wrap">
+  <div class="blog-grid" id="blogGrid">
+
+    <!-- POST DESTAQUE -->
+    <article class="post-card post-featured" data-cat="industrial">
+      <div class="post-thumb">🏭</div>
+      <div class="post-body">
+        <span class="featured-label">⭐ Destaque</span>
+        <span class="post-tag">Industrial</span>
+        <h2 class="post-title">Câmaras Frigoríficas Industriais: tudo que você precisa saber antes de instalar</h2>
+        <p class="post-excerpt">Dimensionamento correto, escolha do fluido refrigerante, isolamento térmico adequado e pontos críticos de manutenção. Neste artigo completo, Rodrigo Brum detalha os principais erros cometidos em projetos de câmaras frias industriais e como evitá-los para garantir eficiência e conformidade com as normas sanitárias.</p>
+        <div class="post-footer">
+          <div class="post-author">
+            <div class="author-avatar">RB</div>
+            <div>
+              <div>Rodrigo Brum</div>
+              <div class="post-date">15 de abril de 2025</div>
+            </div>
+          </div>
+          <a href="#" class="read-more">Ler artigo →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- POST 1 -->
+    <article class="post-card" data-cat="manutencao">
+      <div class="post-thumb">🔧</div>
+      <div class="post-body">
+        <span class="post-tag">Manutenção</span>
+        <h3 class="post-title">5 sinais de que seu ar-condicionado precisa de manutenção urgente</h3>
+        <p class="post-excerpt">Ruídos estranhos, mau cheiro, perda de eficiência e outros alertas que você não deve ignorar no seu sistema de climatização.</p>
+        <div class="post-footer">
+          <div class="post-author">
+            <div class="author-avatar">RB</div>
+            <div>
+              <div>Rodrigo Brum</div>
+              <div class="post-date">02 de abril de 2025</div>
+            </div>
+          </div>
+          <a href="#" class="read-more">Ler artigo →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- POST 2 -->
+    <article class="post-card" data-cat="dicas">
+      <div class="post-thumb">💡</div>
+      <div class="post-body">
+        <span class="post-tag">Dicas</span>
+        <h3 class="post-title">Como reduzir até 30% no consumo de energia do seu sistema HVAC</h3>
+        <p class="post-excerpt">Ajustes simples de temperatura, limpeza de filtros, uso de temporizadores e a importância da manutenção preventiva para a eficiência energética.</p>
+        <div class="post-footer">
+          <div class="post-author">
+            <div class="author-avatar">RB</div>
+            <div>
+              <div>Rodrigo Brum</div>
+              <div class="post-date">18 de março de 2025</div>
+            </div>
+          </div>
+          <a href="#" class="read-more">Ler artigo →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- POST 3 -->
+    <article class="post-card" data-cat="normas">
+      <div class="post-thumb">📋</div>
+      <div class="post-body">
+        <span class="post-tag">Normas & Legislação</span>
+        <h3 class="post-title">ABNT NBR 16280: o que muda na manutenção predial de sistemas de ar-condicionado</h3>
+        <p class="post-excerpt">Entenda as obrigações legais para condomínios e empresas quanto à manutenção de sistemas de climatização e como se adequar.</p>
+        <div class="post-footer">
+          <div class="post-author">
+            <div class="author-avatar">RB</div>
+            <div>
+              <div>Rodrigo Brum</div>
+              <div class="post-date">05 de março de 2025</div>
+            </div>
+          </div>
+          <a href="#" class="read-more">Ler artigo →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- POST 4 -->
+    <article class="post-card" data-cat="industrial">
+      <div class="post-thumb">❄️</div>
+      <div class="post-body">
+        <span class="post-tag">Industrial</span>
+        <h3 class="post-title">Chillers vs. Fan Coils: qual solução escolher para sua empresa?</h3>
+        <p class="post-excerpt">Uma análise técnica e financeira comparando as duas principais tecnologias de climatização para ambientes comerciais e industriais de médio a grande porte.</p>
+        <div class="post-footer">
+          <div class="post-author">
+            <div class="author-avatar">RB</div>
+            <div>
+              <div>Rodrigo Brum</div>
+              <div class="post-date">20 de fevereiro de 2025</div>
+            </div>
+          </div>
+          <a href="#" class="read-more">Ler artigo →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- POST 5 -->
+    <article class="post-card" data-cat="dicas">
+      <div class="post-thumb">🌡️</div>
+      <div class="post-body">
+        <span class="post-tag">Dicas</span>
+        <h3 class="post-title">Por que o gás refrigerante do seu ar-condicionado acaba e o que fazer</h3>
+        <p class="post-excerpt">Vazamentos de gás são um dos problemas mais comuns em sistemas de refrigeração. Saiba identificar, prevenir e resolver com segurança.</p>
+        <div class="post-footer">
+          <div class="post-author">
+            <div class="author-avatar">RB</div>
+            <div>
+              <div>Rodrigo Brum</div>
+              <div class="post-date">10 de fevereiro de 2025</div>
+            </div>
+          </div>
+          <a href="#" class="read-more">Ler artigo →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- POST 6 -->
+    <article class="post-card" data-cat="manutencao">
+      <div class="post-thumb">🧹</div>
+      <div class="post-body">
+        <span class="post-tag">Manutenção</span>
+        <h3 class="post-title">Higienização de ar-condicionado: quando fazer e por que é obrigatória</h3>
+        <p class="post-excerpt">Qualidade do ar interior, saúde dos ocupantes e legislação vigente. Tudo sobre a higienização e qual a frequência ideal para residências e empresas.</p>
+        <div class="post-footer">
+          <div class="post-author">
+            <div class="author-avatar">RB</div>
+            <div>
+              <div>Rodrigo Brum</div>
+              <div class="post-date">28 de janeiro de 2025</div>
+            </div>
+          </div>
+          <a href="#" class="read-more">Ler artigo →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-bar">
+  <h3>Receba artigos novos no seu e-mail</h3>
+  <p>Conteúdo técnico gratuito sobre refrigeração e climatização, direto da Gelado para você.</p>
+  <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+    <input type="email" placeholder="seu@email.com" required>
+    <button type="submit">Quero receber</button>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">GELADO <span>.</span></span>
+  <p class="footer-copy">© 2025 Gelado Climatização. Todos os direitos reservados.</p>
+  <div class="footer-links">
+    <a href="index.html">Início</a>
+    <a href="index.html#servicos">Serviços</a>
+    <a href="index.html#contato">Contato</a>
+  </div>
+</footer>
+
+<script>
+  function filterPosts(cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('#blogGrid .post-card').forEach(card => {
+      if (cat === 'todos' || card.dataset.cat === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function subscribeNewsletter(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Inscrito! ✓';
+    btn.style.background = '#22c55e';
+    e.target.querySelector('input').value = '';
+    setTimeout(() => {
+      btn.textContent = 'Quero receber';
+      btn.style.background = '';
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
