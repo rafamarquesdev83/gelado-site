@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1020">
 <title>Blog — Gelado Climatização</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -28,6 +31,13 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--dark2);
@@ -213,11 +223,13 @@ nav {
   letter-spacing: 0.8px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, border-color 0.2s;
   font-family: inherit;
   white-space: nowrap;
   margin-bottom: -1px;
+  touch-action: manipulation;
 }
+.filter-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .filter-btn:hover { color: rgba(255,255,255,0.75); }
 .filter-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
@@ -373,6 +385,7 @@ nav {
   line-height: 1.3;
   margin-bottom: 0.75rem;
   letter-spacing: -0.2px;
+  text-wrap: balance;
 }
 .post-featured .post-title {
   font-size: clamp(1.5rem, 2.5vw, 2rem);
