@@ -248,6 +248,76 @@
     line-height: 1.4;
   }
 
+  /* ─── HERO NEWS STRIP ─── */
+  .hero-news {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(0,170,255,0.25);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1.8rem;
+    max-width: 520px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .hero-news:hover { background: rgba(0,170,255,0.1); border-color: rgba(0,170,255,0.45); }
+  .hero-news-badge {
+    flex-shrink: 0;
+    font-size: 0.62rem; font-weight: 800;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(0,170,255,0.15);
+    border: 1px solid rgba(0,170,255,0.3);
+    padding: 0.22rem 0.65rem; border-radius: 50px;
+    white-space: nowrap;
+  }
+  .hero-news-text { flex: 1; min-width: 0; }
+  .hero-news-title {
+    font-size: 0.82rem; font-weight: 600;
+    color: rgba(255,255,255,0.9); line-height: 1.35;
+    display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .hero-news-meta { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+  .hero-news-arrow { flex-shrink: 0; color: var(--accent); font-size: 0.9rem; opacity: 0.7; }
+
+  /* ─── INSTAGRAM SECTION ─── */
+  .insta-section { background: #f7f9fc; padding: 4.5rem 6%; }
+  .insta-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .insta-handle {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.82rem; font-weight: 700; color: var(--blue);
+    text-decoration: none; border: 1.5px solid rgba(0,87,168,0.25);
+    padding: 0.45rem 1rem; border-radius: 50px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .insta-handle:hover { background: var(--blue-light); border-color: var(--blue); }
+  .insta-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  }
+  .insta-card {
+    border-radius: var(--radius); overflow: hidden;
+    aspect-ratio: 1; position: relative;
+    text-decoration: none; display: block;
+  }
+  .insta-card-bg {
+    width: 100%; height: 100%; transition: transform 0.4s ease;
+  }
+  .insta-card:hover .insta-card-bg { transform: scale(1.06); }
+  .insta-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.78) 100%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 1.2rem;
+  }
+  .insta-card:hover .insta-card-overlay { opacity: 1; }
+  .insta-card-caption { font-size: 0.8rem; color: rgba(255,255,255,0.95); line-height: 1.4; font-weight: 500; }
+  .insta-cta-wrap { text-align: center; margin-top: 2rem; }
+  @media (max-width: 700px) { .insta-grid { grid-template-columns: repeat(2, 1fr); } }
+
   /* ─── TRUST BAR ─── */
   .trust-bar {
     background: linear-gradient(90deg, #003d7a, #0057a8, #0070cc);
@@ -1181,6 +1251,16 @@
       <span class="hero-chip">HVAC Completo</span>
       <span class="hero-chip">Manutenção & Reparo</span>
     </div>
+    <!-- NEWS STRIP -->
+    <a href="blog.html" class="hero-news" id="heroNewsLink" aria-label="Última notícia do blog">
+      <span class="hero-news-badge">📰 Notícia</span>
+      <div class="hero-news-text">
+        <div class="hero-news-title" id="heroNewsTitle">Mercado HVAC bate R$ 50 bilhões e aposta em refrigerantes ecológicos para 2026</div>
+        <div class="hero-news-meta" id="heroNewsMeta">Industrial · 29 de abril de 2026</div>
+      </div>
+      <span class="hero-news-arrow">›</span>
+    </a>
+
     <div class="hero-actions">
       <a href="#contato" class="btn-blue">Solicitar Orçamento</a>
       <a href="#servicos" class="btn-outline">Ver Soluções</a>
@@ -1882,6 +1962,60 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- INSTAGRAM                                           -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="insta-section" id="instagram">
+  <div class="insta-header">
+    <div>
+      <div class="eyebrow">Redes Sociais</div>
+      <h2 class="section-h2">No <span>Instagram</span></h2>
+      <p style="font-size:0.9rem;color:var(--text);margin-top:0.4rem;">Conteúdo técnico, novidades e bastidores da Gelado Climatização</p>
+    </div>
+    <a href="https://instagram.com/rodrigobrum.gelado" target="_blank" rel="noopener" class="insta-handle">
+      📸 @rodrigobrum.gelado
+    </a>
+  </div>
+  <div class="insta-grid" id="instaGrid">
+
+    <a href="https://www.instagram.com/p/CvY33GMABnk/" target="_blank" rel="noopener" class="insta-card" aria-label="Post Instagram">
+      <div class="insta-card-bg" style="background:linear-gradient(135deg,#0057a8 0%,#003d7a 50%,#001f40 100%);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🏭</div>
+      <div class="insta-card-overlay"><span class="insta-card-caption">Câmara frigorífica industrial — instalação completa</span></div>
+    </a>
+
+    <a href="https://instagram.com/rodrigobrum.gelado" target="_blank" rel="noopener" class="insta-card" aria-label="Post Instagram">
+      <div class="insta-card-bg" style="background:linear-gradient(135deg,#005f73 0%,#003d4d 50%,#001a21 100%);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">❄️</div>
+      <div class="insta-card-overlay"><span class="insta-card-caption">Sistema de refrigeração de alta performance</span></div>
+    </a>
+
+    <a href="https://instagram.com/rodrigobrum.gelado" target="_blank" rel="noopener" class="insta-card" aria-label="Post Instagram">
+      <div class="insta-card-bg" style="background:linear-gradient(135deg,#0070cc 0%,#004a8a 50%,#002244 100%);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🔧</div>
+      <div class="insta-card-overlay"><span class="insta-card-caption">Manutenção preventiva — chiller industrial</span></div>
+    </a>
+
+    <a href="https://instagram.com/rodrigobrum.gelado" target="_blank" rel="noopener" class="insta-card" aria-label="Post Instagram">
+      <div class="insta-card-bg" style="background:linear-gradient(135deg,#0a2540 0%,#0d1e3a 50%,#071525 100%);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🎓</div>
+      <div class="insta-card-overlay"><span class="insta-card-caption">Capacitação técnica — formação de profissionais</span></div>
+    </a>
+
+    <a href="https://instagram.com/rodrigobrum.gelado" target="_blank" rel="noopener" class="insta-card" aria-label="Post Instagram">
+      <div class="insta-card-bg" style="background:linear-gradient(135deg,#006f6f 0%,#004545 50%,#002020 100%);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🤝</div>
+      <div class="insta-card-overlay"><span class="insta-card-caption">Parceria Pescan Químicos — 3ª geração</span></div>
+    </a>
+
+    <a href="https://instagram.com/rodrigobrum.gelado" target="_blank" rel="noopener" class="insta-card" aria-label="Post Instagram">
+      <div class="insta-card-bg" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🌡️</div>
+      <div class="insta-card-overlay"><span class="insta-card-caption">Controle preciso de temperatura em processos industriais</span></div>
+    </a>
+
+  </div>
+  <div class="insta-cta-wrap">
+    <a href="https://instagram.com/rodrigobrum.gelado" target="_blank" rel="noopener" class="btn-blue" style="display:inline-flex;align-items:center;gap:0.5rem;">
+      📸 Ver todos os posts no Instagram
+    </a>
+  </div>
+</section>
+
 <!-- NEWSLETTER -->
 <div class="newsletter-bar">
   <div>
@@ -2036,6 +2170,19 @@
   </div>
 </footer>
 <script>
+
+/* ── Notícia dinâmica no hero (news.json) ── */
+fetch('news.json?v=' + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    const titleEl = document.getElementById('heroNewsTitle');
+    const metaEl  = document.getElementById('heroNewsMeta');
+    const linkEl  = document.getElementById('heroNewsLink');
+    if (titleEl) titleEl.textContent = d.title;
+    if (metaEl)  metaEl.textContent  = (d.category || '') + (d.date ? ' · ' + d.date : '');
+    if (linkEl && d.url) linkEl.href = d.url;
+  })
+  .catch(() => {});
 
 /* ── Abas Knowledge Hub ── */
 function switchTab(tab) {
