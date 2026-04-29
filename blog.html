@@ -402,6 +402,23 @@ nav {
   font-size: 0.92rem;
   color: rgba(255,255,255,0.5);
 }
+.post-source {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 1rem;
+}
+.post-source span { font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.post-source a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+.post-source a:hover { text-decoration: underline; }
 .post-footer {
   display: flex; align-items: center; justify-content: space-between;
   padding-top: 1rem;
@@ -659,6 +676,10 @@ footer {
         <span class="post-tag">Industrial</span>
         <h3 class="post-title">Mercado HVAC bate R$ 50 bilhões e aposta em refrigerantes ecológicos para 2026</h3>
         <p class="post-excerpt">O setor brasileiro atingiu faturamento histórico em 2025 e entra em 2026 com foco na substituição do R-410A por alternativas de baixo impacto ambiental, como R-32 e R-454B.</p>
+        <div class="post-source">
+          <span>Fonte:</span>
+          <a href="https://argreen.com.br/en/revolucao-no-hvac-comercial-em-2026-conforto-personalizado-sustentabilidade-e-refrigerantes-ecologicos-dominam-o-mercado/" target="_blank" rel="noopener">argreen.com.br</a>
+        </div>
         <div class="post-footer">
           <div class="post-author">
             <div class="author-avatar">RB</div>
@@ -667,7 +688,7 @@ footer {
               <div class="post-date">29 de abril de 2026</div>
             </div>
           </div>
-          <a href="https://argreen.com.br/en/revolucao-no-hvac-comercial-em-2026-conforto-personalizado-sustentabilidade-e-refrigerantes-ecologicos-dominam-o-mercado/" target="_blank" class="read-more">Ler</a>
+          <a href="https://argreen.com.br/en/revolucao-no-hvac-comercial-em-2026-conforto-personalizado-sustentabilidade-e-refrigerantes-ecologicos-dominam-o-mercado/" target="_blank" rel="noopener" class="read-more">Ler</a>
         </div>
       </div>
     </article>
